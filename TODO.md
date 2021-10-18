@@ -10,9 +10,10 @@
   - [ ] Extension
     - [x] Get data (repos, README)
     - [x] Generate html (README, repos)
-    - [ ] Insert html into LinkedIn page
+    - [x] Insert html into LinkedIn page
     - [ ] Auto-suggest username based on profile (+ input username or url; use regex to extract username from url)
     - [ ] browser cache
-    - [ ] manifest, etc
+    - [x] manifest, etc
 - [ ] tests, lint
 - [ ] update readme
+- [ ] icon, publish

@@ -5,6 +5,10 @@
 - [Github GraphQL API Explorer](https://docs.github.com/en/graphql/overview/explorer)
 - [Awesome GitHub Profile README](https://github.com/abhisheknaiidu/awesome-github-profile-readme)
 
+## Future/Ideas
+
+- [ ] Cache: in-browser (local), and api/server
+
 ## A small note on getting a user's readme
 
 This is proving to be an unnecessary pain, because of: **formatting (CSS)**.
@@ -23,7 +27,6 @@ Cons:
 ```graphql
 query User($login: String!) { 
   user (login: $login) {
-    # https://stackoverflow.com/questions/46248607/how-to-get-readme-md-from-github-graphql-api
     readme: repository (name: $login) {
       object(expression: "HEAD:README.md") {
         ... on Blob {

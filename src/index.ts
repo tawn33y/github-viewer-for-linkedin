@@ -1,7 +1,10 @@
 import marked from 'marked';
-import DOMPurify from 'dompurify';
 import { print } from 'graphql/language/printer';
 import userQuery from './graphql/userQuery.gql';
+
+const autoGuessUsername = () => {
+
+};
 
 interface Repo {
   description: string;
@@ -49,13 +52,47 @@ const getUserFromApi = async (login: string): Promise<User> => {
   return user;
 };
 
-const getReadMeHtml = (markdown: string): string => {
-  const rawHtml = marked(markdown);
-  const html = DOMPurify.sanitize(rawHtml);
-  return html;
+const generateReadMeCardEl = (content?: string): string => {
+  if (content) return `<div>${content}</div>`;
+  
+  return `
+    <div>
+      <p class="pinned-item-desc color-text-secondary text-small d-block mt-2 mb-3">
+        No README found.
+      </p>
+    </div
+  `;
 };
 
-const generateRepoCard = (login: string, repo: Repo): string => `
+const generateReadMeEl = (user: User): void => {
+  const markup = user.readme.object ? marked(user.readme.object.text) : undefined;
+  const readMeHtml = generateReadMeCardEl(markup);
+
+  // render in test html
+  const el = document.querySelectorAll('#app #readme');
+  if (el.length > 0) {
+    el[0].innerHTML = readMeHtml;
+    return;
+  }
+
+  // or render on actual linkedin page
+  const html = `
+    <div id="ember-gvfli-readme" class="pv-oc ember-view">
+      <section class="pv-profile-section pv-about-section artdeco-card p5 mt4 ember-view">
+        <header class="pv-profile-section__card-header">
+          <h2 class="pv-profile-section__card-heading">
+            Github README
+          </h2>
+        </header>
+        <div>${readMeHtml}</div>
+      </section>
+    </div>
+  `;
+
+  document.querySelector('#main > div .pv-oc:not(#oc-background-section)')?.insertAdjacentHTML('afterend', html);
+};
+
+const generateRepoCardEl = (login: string, repo: Repo): string => `
   <div class="Box d-flex py-3 width-full">
     <a class="text-bold flex-auto min-width-0" href="${repo.url}" target="_blank">
       ${repo.name}
@@ -91,13 +128,37 @@ const generateRepoCard = (login: string, repo: Repo): string => `
   </div>
 `;
 
-const generateReadMeCard = (content?: string) => `<div>${content}</div`;
+const generateRepoListEl = (user: User, login: string): void => {
+  const reposHtml = user.repositories.nodes.map((repo) => generateRepoCardEl(login, repo)).join('');
+
+  // render in test html
+  const el = document.querySelectorAll('#app #repos');
+  if (el.length > 0) {
+    el[0].innerHTML = reposHtml;
+    return;
+  }
+
+  // or render on actual linkedin page
+  const html = `
+    <div id="ember-gvfli-repos" class="pv-oc ember-view">
+      <section class="pv-profile-section pv-about-section artdeco-card p5 mt4 ember-view">
+        <header class="pv-profile-section__card-header">
+          <h2 class="pv-profile-section__card-heading">
+            Github Repos
+          </h2>
+        </header>
+        <div>${reposHtml}</div>
+      </section>
+    </div>
+  `;
+
+  document.querySelector('#main > div #ember-gvfli-readme')?.insertAdjacentHTML('afterend', html);
+};
 
 window.addEventListener('load', async () => {
-  const login = 'tawn33y';
+  const login = 'abhisheknaiidu';
   const user = await getUserFromApi(login);
-  const readme = user.readme.object ? getReadMeHtml(user.readme.object.text) : 'No README found.';
 
-  document.querySelectorAll('#app #repos')[0].innerHTML = user.repositories.nodes.map((repo) => generateRepoCard(login, repo)).join('');
-  document.querySelectorAll('#app #readme')[0].innerHTML = generateReadMeCard(readme);
+  generateReadMeEl(user);
+  generateRepoListEl(user, login);
 });

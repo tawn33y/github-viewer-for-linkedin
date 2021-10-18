@@ -1,14 +1,13 @@
 {
   "name": "github-viewer-for-linkedin",
   "version": "0.1.0",
-  "description": "Extension that gets a user's README and top repos from Github and renders them on their LinkedIn page",
+  "description": "An extension that gets a user's README and top repos from Github and renders them on their LinkedIn page",
   "main": "dist/index.js",
   "scripts": {
     "start": "nodemon",
     "build": "rm -rf dist && webpack"
   },
   "dependencies": {
-    "dompurify": "^2.3.3",
     "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
     "graphql-tag": "^2.12.5",

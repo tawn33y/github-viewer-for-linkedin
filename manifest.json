@@ -1,5 +1,14 @@
 {
-  "name": "github-viewer-for-linkedin",
-  "description": "Extension that gets a user's README and top repos from Github and renders them on their LinkedIn page",
-  "manifest_version": 3
+  "name": "Github Viewer for LinkedIn",
+  "description": "An extension that gets a user's README and top repos from Github and renders them on their LinkedIn page",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/in/*"],
+      "css": ["public/styles.css"],
+      "js": ["dist/index.js"]
+    }
+  ]
 }
