@@ -1,0 +1,36 @@
+# https://docs.github.com/en/graphql/overview/explorer
+query User($login: String!) { 
+  # https://docs.github.com/en/graphql/reference/objects#user
+  user (login: $login) {
+    url
+    
+    # https://stackoverflow.com/questions/46248607/how-to-get-readme-md-from-github-graphql-api
+    readme: repository (name: $login) {
+      object(expression: "HEAD:README.md") {
+        ... on Blob {
+          text
+        }
+      }
+    }
+    
+    # Q: forks? archives?
+    repositories (first: 4, orderBy: { direction: DESC, field : STARGAZERS }, privacy: PUBLIC) {
+      nodes {
+        ...repositoryFields
+      }
+    }
+  }
+}
+
+# https://docs.github.com/en/graphql/reference/objects#repository
+fragment repositoryFields on Repository {
+  name
+  url
+  description
+  stargazerCount
+  forkCount
+  primaryLanguage {
+    color
+    name
+  }
+}

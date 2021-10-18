@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "target": "es5",
+    "module": "es2015",
+    "removeComments": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node"
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
