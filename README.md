@@ -17,6 +17,7 @@ An extension that gets a user's README/repos from Github, and renders them on th
 - [ ] popup main window: toggle auto-load on/off
 - [ ] tests
 - [ ] api/server cache
+- [ ] port to firefox/other browsers
 
 ## Run extension (locally)
 

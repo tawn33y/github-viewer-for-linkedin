@@ -18,6 +18,8 @@
 - [x] update readme
 - [x] icon, publish
 - [x] clean up code
+- [ ] extension url (+ readme URL, + github URL)
+- [ ] confirm working on edge/chromium
 - [ ] Next features
   - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
   - [ ] browser cache
