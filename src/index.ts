@@ -125,13 +125,13 @@ const generateReadMeCardEl = (content?: string): string => {
   `;
 };
 
-const generateViewOnGithubButtonEl = (login?: string): string => {
-  if (!login) return '';
+const generateViewOnGithubButtonEl = (user: User): string => {
+  if (!user) return '';
 
   return `
     <div class="align-self-center ember-view">
       <span>
-        <a href="https://github.com/${login}" target="_blank">
+        <a href="${user.url}" target="_blank">
           <button class="artdeco-button artdeco-button--muted artdeco-button--2 artdeco-button--tertiary ember-view">
             <span class="artdeco-button__text">
               View on Github
@@ -164,7 +164,7 @@ const generateReadMeEl = (user: User, login?: string): void => {
             Github README
           </h2>
 
-          ${generateViewOnGithubButtonEl(login)}
+          ${generateViewOnGithubButtonEl(user)}
         </header>
         <div>${readMeHtml}</div>
       </section>
@@ -240,7 +240,7 @@ const generateRepoListEl = (user: User, login?: string): void => {
             Github Repos
           </h2>
 
-          ${generateViewOnGithubButtonEl(login)}
+          ${generateViewOnGithubButtonEl(user)}
         </header>
         <div>${reposHtml}</div>
       </section>
@@ -252,7 +252,6 @@ const generateRepoListEl = (user: User, login?: string): void => {
 
 window.addEventListener('load', async () => {
   const login = await autoGuessUsername();
-  console.log('++', login);
 
   const maybeNullUser = login ? await getUserFromApi(login) : defaultUser;
   const user = maybeNullUser ?? defaultUser;
