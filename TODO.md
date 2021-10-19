@@ -1,20 +1,24 @@
 # TODOs
 
-- [ ] Steps
+- [x] Steps
   - [x] Get user README
     - [x] Via API
     - [x] Via direct url
     - [x] Via puppeteer
   - [x] Get 4 repos by username, sort by stars/forks
     - [x] Via API
-  - [ ] Extension
+  - [x] Extension
     - [x] Get data (repos, README)
     - [x] Generate html (README, repos)
     - [x] Insert html into LinkedIn page
-    - [ ] Auto-suggest username based on profile (+ input username or url; use regex to extract username from url)
-    - [ ] browser cache
+    - [x] Auto-suggest username based on profile
     - [x] manifest, etc
     - [x] Add github link in card
-- [ ] lint, etc
-- [ ] update readme/slides
-- [ ] icon, publish
+- [x] lint, etc
+- [ ] update readme
+- [ ] clean up code
+- [ ] icon, publish, slides, share
+- [ ] Next features
+  - [ ] browser cache
+  - [ ] popup main window: toggle auto-load on/off
+  - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)

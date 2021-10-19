@@ -7,8 +7,11 @@
 - Load unpacked in browser
 - Open LinkedIn to view
 
-## Todos/Future
+## Roadmap
 
+- [ ] browser cache
+- [ ] popup main window: toggle auto-load on/off
+- [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
 - [ ] tests
 - [ ] api/server cache
 

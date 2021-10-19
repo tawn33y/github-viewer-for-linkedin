@@ -1,0 +1,19 @@
+# https://docs.github.com/en/graphql/reference/queries#searchresultitemconnection
+query ($searchQuery: String!) { 
+  search(query: $searchQuery, type: USER, first: 10, after: "Y3Vyc29yOjEw") {
+    nodes {
+      ... on User {
+        name
+        avatarUrl(size: 20)
+        login
+        bio
+        url
+        email
+        location
+      }
+    }
+    pageInfo {
+      endCursor
+    }
+  }
+}
