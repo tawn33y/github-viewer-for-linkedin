@@ -1,19 +1,53 @@
-# README
+# github-viewer-for-linkedin
 
-## Steps
+An extension that gets a user's README and top repos from Github and renders them on their LinkedIn page.
 
-- Clone repo
-- Create token & paste in .env
-- Load unpacked in browser
-- Open LinkedIn to view
+![Screenshot](./screenshot.png)
+
+## Features
+
+- Auto-runs when viewing a user's page on LinkedIn, retrieves their README and repos from Github via the GraphQL API, and renders them on the page
+- Auto-guesses the user's Github username from their LinkedIn profile
+  - **Note**: Current implementation is simple; the extension gets the github url from the 'Contact Info' section of the user's LinkedIn page. If no url is found, it shows 'Not found'. Future implementation will be a bit exhaustive by including a search page with the user's name, and an option to search a github username/url directly
 
 ## Roadmap
 
+- [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
 - [ ] browser cache
 - [ ] popup main window: toggle auto-load on/off
-- [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
 - [ ] tests
 - [ ] api/server cache
+
+## Run extension (locally)
+
+- Clone the repo
+
+```sh
+git clone https://github.com/tawn33y/github-viewer-for-linkedin.git
+cd github-viewer-for-linkedin
+```
+
+- Create [API auth token](https://docs.github.com/en/graphql/guides/forming-calls-with-graphql#authenticating-with-graphql)
+
+- Create a `.env` file in cloned repo folder and paste the following (update `your-token` accordingly):
+
+```txt
+GITHUB_AUTH_TOKEN=your-token
+```
+
+- Install deps & build
+
+```sh
+npm i
+npm run build
+
+# alternatively, monitor for any changes & automatically rebuild
+npm start
+```
+
+- Open Chrome and go to the following URL: [chrome://extensions](chrome://extensions)
+- Enable Developer mode, click on `Load unpacked` and select the cloned repo folder
+- Open a person's LinkedIn page to see the magic :)
 
 ## Helpful links
 
@@ -61,7 +95,7 @@ https://raw.githubusercontent.com/some-username/some-username/master/README.md
 https://raw.githubusercontent.com/some-username/some-username/main/README.md
 ```
 
-### 3) Via puppeteer
+### 3) Via puppeteer or playwright
 
 Pros:
 
@@ -96,3 +130,7 @@ document.querySelectorAll('.flex-shrink-0 > div > .position-relative > .Box > .B
 
 <!-- 6: open file in browser; should work OK! -->
 ```
+
+## Pull Requests
+
+Any and all PRs are open.

@@ -15,10 +15,11 @@
     - [x] manifest, etc
     - [x] Add github link in card
 - [x] lint, etc
-- [ ] update readme
+- [x] update readme
 - [ ] clean up code
 - [ ] icon, publish, slides, share
 - [ ] Next features
+  - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
   - [ ] browser cache
   - [ ] popup main window: toggle auto-load on/off
-  - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
+  - [ ] tests
