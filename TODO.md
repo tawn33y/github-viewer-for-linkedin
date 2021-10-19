@@ -16,7 +16,7 @@
     - [x] Add github link in card
 - [x] lint, etc
 - [x] update readme
-- [ ] icon, publish
+- [x] icon, publish
 - [ ] clean up code
 - [ ] Next features
   - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)

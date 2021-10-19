@@ -10,7 +10,8 @@
     "lint": "eslint --ext .ts ./src",
     "ts-check": "tsc --noEmit -p  .",
     "pre-commit": "npm-run-all lint ts-check build",
-    "pre-commit-msg": "echo 'Please wait, running checks...' && exit 0"
+    "pre-commit-msg": "echo 'Please wait, running checks...' && exit 0",
+    "create-zip": "bash ./create-zip.sh"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
