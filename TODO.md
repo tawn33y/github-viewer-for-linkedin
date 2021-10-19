@@ -14,6 +14,7 @@
     - [ ] Auto-suggest username based on profile (+ input username or url; use regex to extract username from url)
     - [ ] browser cache
     - [x] manifest, etc
-- [ ] tests, lint
-- [ ] update readme
+    - [x] Add github link in card
+- [ ] lint, etc
+- [ ] update readme/slides
 - [ ] icon, publish

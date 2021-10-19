@@ -1,13 +1,21 @@
 # README
 
+## Steps
+
+- Clone repo
+- Create token & paste in .env
+- Load unpacked in browser
+- Open LinkedIn to view
+
+## Todos/Future
+
+- [ ] tests
+- [ ] api/server cache
+
 ## Helpful links
 
 - [Github GraphQL API Explorer](https://docs.github.com/en/graphql/overview/explorer)
 - [Awesome GitHub Profile README](https://github.com/abhisheknaiidu/awesome-github-profile-readme)
-
-## Future/Ideas
-
-- [ ] Cache: in-browser (local), and api/server
 
 ## A small note on getting a user's readme
 

@@ -2,8 +2,61 @@ import marked from 'marked';
 import { print } from 'graphql/language/printer';
 import userQuery from './graphql/userQuery.gql';
 
-const autoGuessUsername = () => {
+const waitForElement = (selector: string): Promise<Element | null> => new Promise(resolve => {
+  if (document.querySelector(selector)) {
+    return resolve(document.querySelector(selector));
+  }
 
+  const observer = new MutationObserver(mutations => {
+    if (document.querySelector(selector)) {
+      resolve(document.querySelector(selector));
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+});
+
+const getUsernameFromContactInfoModal = async (): Promise<string | undefined> => {
+  // open modal
+  let el;
+  for (const searchEl of document.querySelectorAll("a.ember-view") as any) {
+    if (searchEl.textContent.includes("Contact info")) {
+      el = searchEl;
+    }
+  }
+  el.click();
+  await waitForElement('button.artdeco-modal__dismiss');
+
+  // extract username from url
+  let username;
+  const linksEl = document.querySelectorAll('a.pv-contact-info__contact-link');
+  for (var i = 0, len = linksEl.length; i < len; i++) {
+    const url = (linksEl[i] as HTMLElement).innerText;
+    if (url.includes('github.com')) {
+      username = url.split('/').map(str => str.replace(/\s+/g, '')).filter(str => !!str).slice(-1)[0];
+    }
+  }
+
+  // close modal
+  (document.querySelectorAll('button.artdeco-modal__dismiss')[0] as HTMLElement)?.click?.();
+
+  return username;
+};
+
+const autoGuessUsername = async (): Promise<string | undefined> => {
+  // 1: if github url exists on contact info, lucky break
+  const username = await getUsernameFromContactInfoModal();
+  if (username) return username;
+
+  return undefined;
+
+  // @todo
+  // 2: search by linkedin username/name
+  // 3: textbox/not found
 };
 
 interface Repo {
@@ -19,8 +72,8 @@ interface Repo {
 }
 
 interface User {
-  url: string;
-  readme: {
+  url: string | null;
+  readme: null | {
     object: null | {
       text: string;
     };
@@ -29,6 +82,14 @@ interface User {
     nodes: Repo[];
   };
 }
+
+const defaultUser: User = {
+  url: null,
+  readme: null,
+  repositories: {
+    nodes: [],
+  },
+};
 
 const getUserFromApi = async (login: string): Promise<User> => {
   const result = await fetch('https://api.github.com/graphql', {
@@ -64,8 +125,27 @@ const generateReadMeCardEl = (content?: string): string => {
   `;
 };
 
-const generateReadMeEl = (user: User): void => {
-  const markup = user.readme.object ? marked(user.readme.object.text) : undefined;
+const generateViewOnGithubButtonEl = (login?: string): string => {
+  if (!login) return '';
+
+  return `
+    <div class="align-self-center ember-view">
+      <span>
+        <a href="https://github.com/${login}" target="_blank">
+          <button class="artdeco-button artdeco-button--muted artdeco-button--2 artdeco-button--tertiary ember-view">
+            <span class="artdeco-button__text">
+              View on Github
+            </span>
+          </button>
+        </a>
+        <div></div>
+      </span>
+    </div>
+  `;
+};
+
+const generateReadMeEl = (user: User, login?: string): void => {
+  const markup = user.readme?.object ? marked(user.readme.object.text) : undefined;
   const readMeHtml = generateReadMeCardEl(markup);
 
   // render in test html
@@ -83,6 +163,8 @@ const generateReadMeEl = (user: User): void => {
           <h2 class="pv-profile-section__card-heading">
             Github README
           </h2>
+
+          ${generateViewOnGithubButtonEl(login)}
         </header>
         <div>${readMeHtml}</div>
       </section>
@@ -92,14 +174,14 @@ const generateReadMeEl = (user: User): void => {
   document.querySelector('#main > div .pv-oc:not(#oc-background-section)')?.insertAdjacentHTML('afterend', html);
 };
 
-const generateRepoCardEl = (login: string, repo: Repo): string => `
+const generateRepoCardEl = (repo: Repo, login?: string): string => `
   <div class="Box d-flex py-3 width-full">
     <a class="text-bold flex-auto min-width-0" href="${repo.url}" target="_blank">
       ${repo.name}
     </a>
 
     <p class="pinned-item-desc color-text-secondary text-small d-block mt-2 mb-3">
-      ${repo.description}
+      ${repo.description ?? ''}
     </p>
 
     <p class="mb-0 f6 color-text-secondary">
@@ -128,8 +210,19 @@ const generateRepoCardEl = (login: string, repo: Repo): string => `
   </div>
 `;
 
-const generateRepoListEl = (user: User, login: string): void => {
-  const reposHtml = user.repositories.nodes.map((repo) => generateRepoCardEl(login, repo)).join('');
+const generateRepoListEl = (user: User, login?: string): void => {
+  let reposHtml;
+  if (user.repositories.nodes.length > 0) {
+    reposHtml = user.repositories.nodes.map((repo) => generateRepoCardEl(repo, login)).join('');
+  } else {
+    reposHtml = `
+      <div>
+        <p class="pinned-item-desc color-text-secondary text-small d-block mt-2 mb-3">
+          No repos found.
+        </p>
+      </div
+    `;
+  }
 
   // render in test html
   const el = document.querySelectorAll('#app #repos');
@@ -146,6 +239,8 @@ const generateRepoListEl = (user: User, login: string): void => {
           <h2 class="pv-profile-section__card-heading">
             Github Repos
           </h2>
+
+          ${generateViewOnGithubButtonEl(login)}
         </header>
         <div>${reposHtml}</div>
       </section>
@@ -156,9 +251,12 @@ const generateRepoListEl = (user: User, login: string): void => {
 };
 
 window.addEventListener('load', async () => {
-  const login = 'abhisheknaiidu';
-  const user = await getUserFromApi(login);
+  const login = await autoGuessUsername();
+  console.log('++', login);
 
-  generateReadMeEl(user);
+  const maybeNullUser = login ? await getUserFromApi(login) : defaultUser;
+  const user = maybeNullUser ?? defaultUser;
+
+  generateReadMeEl(user, login);
   generateRepoListEl(user, login);
 });
