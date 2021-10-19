@@ -1,6 +1,6 @@
 # https://docs.github.com/en/graphql/reference/queries#searchresultitemconnection
-query ($searchQuery: String!) { 
-  search(query: $searchQuery, type: USER, first: 10, after: "Y3Vyc29yOjEw") {
+query ($searchQuery: String!, $afterCursor: String) { 
+  search(query: $searchQuery, type: USER, first: 10, after: $afterCursor) {
     nodes {
       ... on User {
         name

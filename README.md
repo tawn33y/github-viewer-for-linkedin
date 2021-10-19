@@ -45,9 +45,14 @@ npm run build
 npm start
 ```
 
-- Open Chrome and go to the following URL: [chrome://extensions](chrome://extensions)
-- Enable Developer mode, click on `Load unpacked` and select the cloned repo folder
-- Open a person's LinkedIn page to see the magic :)
+- To use on actual LinkedIn page:
+  - Open Chrome and go to the following URL: [chrome://extensions](chrome://extensions)
+  - Enable Developer mode, click on `Load unpacked` and select the cloned repo folder
+  - Open a person's LinkedIn page to see the magic :)
+  - **Note:** If nothing happens, click the extension icon on the browser at the top (next to the url/search bar), and then reload the page. A future update will fix this issue.
+- To use on a dummy local page:
+  - Edit `public/test.html` & update line 15 with the username you want
+  - Open the file directly in your browser to see the magic :)
 
 ## Pull Requests
 

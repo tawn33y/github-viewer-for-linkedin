@@ -17,7 +17,7 @@
 - [x] lint, etc
 - [x] update readme
 - [x] icon, publish
-- [ ] clean up code
+- [x] clean up code
 - [ ] Next features
   - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
   - [ ] browser cache
