@@ -1,6 +1,6 @@
 # github-viewer-for-linkedin
 
-An extension that gets a user's README and top repos from Github and renders them on their LinkedIn page.
+An extension that gets a user's README/repos from Github, and renders them on their LinkedIn page.
 
 ![Screenshot](./screenshot.png)
 
@@ -48,6 +48,10 @@ npm start
 - Open Chrome and go to the following URL: [chrome://extensions](chrome://extensions)
 - Enable Developer mode, click on `Load unpacked` and select the cloned repo folder
 - Open a person's LinkedIn page to see the magic :)
+
+## Pull Requests
+
+PRs are most welcome! 🎉
 
 ## Helpful links
 
@@ -130,7 +134,3 @@ document.querySelectorAll('.flex-shrink-0 > div > .position-relative > .Box > .B
 
 <!-- 6: open file in browser; should work OK! -->
 ```
-
-## Pull Requests
-
-Any and all PRs are open.
