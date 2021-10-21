@@ -1,4 +1,4 @@
-# github-viewer-for-linkedin
+# Github Viewer for LinkedIn
 
 An extension that gets a user's README/repos from Github, and renders them on their LinkedIn page.
 
