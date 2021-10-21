@@ -22,8 +22,7 @@
   - [x] fix load by default (background)
   - [x] remove hack (urls)
   - [x] show "force start" button
-  - [ ] linkedin css
-
+  - [x] linkedin css
   - [ ] extension url (+ readme URL, + github URL)
   - [ ] confirm working on edge/chromium
   - [ ] Add analytics

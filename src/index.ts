@@ -47,7 +47,7 @@ window.addEventListener('load', () => {
   displayGithubView();
 });
 
-chrome.runtime.onMessage.addListener((request): void => {
+chrome.runtime?.onMessage.addListener((request): void => {
   if (request.message === 'onDisplayGithubView') {
     displayGithubView();
   }
