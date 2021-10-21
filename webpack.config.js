@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     index: './src/index.ts',
     background: './src/background.ts',
+    popup: './src/popup.ts',
   },
   mode: 'development',
   module: {

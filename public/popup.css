@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.root {
+  width: 20rem;
+  height: 25rem;
+}
+
+.navbar {
+  display: flex;
+  border-bottom: 1px #ccc solid;
+  padding: 0.75rem;
+  background: #0274b3;
+}
+
+.navbar > img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.navbar > p {
+  margin: 0.375rem 0 0 0.25rem;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  text-align: center;
+}
+
+.main > img {
+  width: 15rem;
+}
+
+.main > p:nth-child(1n+3) {
+  margin-top: 0;
+}

@@ -40,7 +40,6 @@ const displayGithubView = async (): Promise<void> => {
 
   renderReadMe(user);
   renderReposList(user, username);
-
   isLoading = false;
 };
 

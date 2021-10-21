@@ -2,13 +2,27 @@
 <html>
   <head>
     <title>Github Viewer for LinkedIn</title>
-    <script src="popup.js"></script>
+    <link rel="stylesheet" href="popup.css">
+    <script src="../dist/popup.js"></script>
   </head>
   <body>
-    <div style="width: 300px; height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-      <img src="../images/icons/icon128.png" width="100">
-      <p><strong>Github Viewer for LinkedIn</strong><br></p>
-      <p>Running...</p>
+    <div class="root">
+      <div class="navbar">
+        <img src="../images/icons/icon128-white.png">
+        <p>Github Viewer for LinkedIn</p>
+      </div>
+      <div class="main">
+        <img src="../images/success.gif" alt="Success; Credit: Aleksandar Savic">
+        <!-- Image credits: https://dribbble.com/shots/13953991-Check-Mark -->
+        <p><strong>All good! Running successfully</strong></p>
+        <p id="prompt-force-start">
+          <span>Not running?</span>
+          <a href="#" id="prompt-force-start-hyperlink">Force start</a>
+        </p>
+        <p style="display: none;" id="prompt-done">
+          Done (<span id="prompt-done-count">3</span>)
+        </p>
+      </div>
     </div>
   </body>
 </html>
