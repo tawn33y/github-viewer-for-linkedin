@@ -11,7 +11,6 @@
     "48": "images/icons/icon48.png",
     "128": "images/icons/icon128.png"
   },
-  "permissions": ["activeTab"],
   "content_scripts": [
     {
       "matches": ["https://www.linkedin.com/in/*"],
