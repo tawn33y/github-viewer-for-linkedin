@@ -5,7 +5,10 @@ require('dotenv').config();
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: './src/index.ts',
+  entry: {
+    index: './src/index.ts',
+    background: './src/background.ts',
+  },
   mode: 'development',
   module: {
     rules: [
@@ -22,7 +25,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {

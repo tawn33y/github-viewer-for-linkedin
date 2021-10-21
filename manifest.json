@@ -14,9 +14,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/in/*"],
+      "matches": ["*://*.linkedin.com/in/*"],
       "css": ["public/styles.css"],
       "js": ["dist/index.js"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "permissions": ["webNavigation"]
 }

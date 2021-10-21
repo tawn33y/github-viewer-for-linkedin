@@ -22,7 +22,12 @@ const renderReposList = (user: User, username?: string): void => {
   document.querySelector('#main #ember-gvfl-readme')?.insertAdjacentHTML('afterend', emberContainerHtml);
 };
 
-window.addEventListener('load', async () => {
+let isLoading = false;
+
+const displayGithubView = async (): Promise<void> => {
+  if (isLoading) return;
+  isLoading = true;
+
   let user = defaultUser;
   const username = await getGithubUsernameFromLinkedInContactInfoModal();
 
@@ -35,4 +40,16 @@ window.addEventListener('load', async () => {
 
   renderReadMe(user);
   renderReposList(user, username);
+
+  isLoading = false;
+};
+
+window.addEventListener('load', () => {
+  displayGithubView();
+});
+
+chrome.runtime.onMessage.addListener((request): void => {
+  if (request.message === 'onDisplayGithubView') {
+    displayGithubView();
+  }
 });

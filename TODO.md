@@ -22,8 +22,5 @@
   - [ ] fix load by default (background)
   - [ ] extension url (+ readme URL, + github URL)
   - [ ] confirm working on edge/chromium
-- [ ] Next features
-  - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
-  - [ ] browser cache
-  - [ ] popup main window: toggle auto-load on/off
-  - [ ] tests
+  - [ ] Add analytics
+- [ ] roadmap

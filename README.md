@@ -15,6 +15,7 @@ An extension that gets a user's README/repos from Github, and renders them on th
 - [ ] show search page: textbox, auto-search user's name (+use regex to extract username if url)
 - [ ] browser cache
 - [ ] popup main window: toggle auto-load on/off
+- [ ] show loading gif
 - [ ] tests
 - [ ] api/server cache
 - [ ] port to firefox/other browsers
