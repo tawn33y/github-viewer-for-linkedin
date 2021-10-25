@@ -23,7 +23,7 @@
   - [x] remove hack (urls)
   - [x] show "force start" button
   - [x] linkedin css
-  - [ ] extension url (+ readme URL, + github URL)
+  - [x] extension url (+ readme URL, + github URL)
   - [ ] confirm working on edge/chromium
   - [ ] Add analytics
 - [ ] roadmap

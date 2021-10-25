@@ -4,6 +4,10 @@ An extension that gets a user's README/repos from Github, and renders them on th
 
 ![Screenshot](./images/screenshot.png)
 
+## Install
+
+Visit the [Chrome Web Store extension page](https://chrome.google.com/webstore/detail/github-viewer-for-linkedi/jcggedbohdbpapoccbbgiibjjkipahfa) to install.
+
 ## Features
 
 - Auto-runs when viewing a user's page on LinkedIn, retrieves their README and repos from Github via the GraphQL API, and renders them on the page
