@@ -1,6 +1,6 @@
 {
   "name": "github-viewer-for-linkedin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An extension that gets a user's README and top repos from Github and renders them on their LinkedIn page",
   "main": "dist/index.js",
   "scripts": {
